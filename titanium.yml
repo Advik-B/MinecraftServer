@@ -1,0 +1,547 @@
+# This is the main configuration file for Titanium.
+# It's collect all the settings from bukkit.yml, spigot.yml etc.
+# Command aliases also go in this file, just put what you would normally put in commands.yml under a commands: tag
+# Configuration from bukkit.yml
+bukkit:
+  settings:
+    # Whether the end world is loaded.
+    allow-end: true
+    # Should a warning message be sent to console when the server is lagging or behind.
+    warn-on-overload: true
+    # On restart, plugins in this folder will be moved and updated.
+    update-folder: update
+    # TBH I don't know what is it, but maybe here it is explained better https://bukkit.fandom.com/wiki/Permissions.yml.
+    permissions-file: permissions.yml
+    # Enable the /timings command to track the execution time of events by plugins.
+    plugin-profiling: false
+    # Delay in milliseconds for a client to reconnect.
+    # Disabled if less than or equal to 0.
+    connection-throttle: 4000
+    # Whether to publish the plugin list in pings.
+    query-plugins: false
+    # Should a warning message be sent to console when a deprecated event is used by a plugin.
+    deprecated-verbose: default
+    # Message sent to clients before shutdown.
+    shutdown-message: Server closed!
+    # Whether to not check if the login location is safe.
+    use-exact-login-location: false
+    # Directory for where world files are stored.
+    world-container: .
+  chunk-gc:
+    # Ticks between each chunk garbage collection event.
+    # Disabled if set to 0.
+    period-in-ticks: 600
+    # Number of chunks that must have been loaded since the last chunk garbage collection event before another event is queued.
+    # Disabled if set to 0.
+    load-threshold: 0
+  spawn-limits:
+    # Maximum number of naturally spawned monsters per-world.
+    monsters: 80
+    # Maximum number of naturally spawned animals per-world.
+    animals: 15
+    # Maximum number of naturally spawned water animals per-world.
+    water-animals: 5
+    # Maximum number of naturally spawned ambient entities per-world
+    ambient: 15
+  ticks-per:
+    # Number of ticks before considering a natural animal spawn event.
+    # Below 0 will reset to server default.
+    animal-spawns: 400
+    # Number of ticks before considering a natural monster spawn event.
+    # Below 0 will reset to server default.
+    monsters-spawn: 1
+    # Number of ticks before all worlds are auto-saved.
+    # Below 0 will reset to server default, so set to a high value if you want to disable.
+    autosave: 6000
+  database:
+    username: bukkit
+    isolation: SERIALIZABLE
+    driver: org.sqlite.JDBC
+    password: walrus
+    url: jdbc:sqlite:{DIR}{NAME}.db
+# Configuration from spigot.yml
+spigot:
+  settings:
+    # Whether to run in debugger mode.
+    debug: false
+    # Whether to write the user cache to disk only before shutdown.
+    save-user-cache-on-stop-only: false
+    # Number of seconds to abort and print a thread dump when the server is unresponsive.
+    timeout-time: 60
+    # Whether to run the restart-script on server-crash.
+    restart-on-crash: false
+    # Path to a restart script to turn the server back on.
+    restart-script: ./start.sh
+    # Whether to bind to the network only after all plugins are loaded.
+    late-bind: false
+    # Whether the server is running behind a bungee cord proxy
+    bungeecord: false
+    # Maximum number of players to publish in ping messages.
+    sample-count: 12
+    # Number of ticks before shuffling the tick-order of players to prevent relog gaming to be first to get items.
+    player-shuffle: 0
+    # Whether to blacklist certain items that creative players can spawn.
+    filter-creative-items: true
+    # Maximum number of entries in the usercache.json file.
+    user-cache-size: 1000
+    # Maximum number of entries in the integer cache, which is used extensively during world generation.
+    cache-limit: 1024
+    # Magic number used as a threshold for invalid move events.
+    moved-wrongly-threshold: 0.0625
+    # Maximum number of blocks per second a player can move before the event is cancelled.
+    moved-too-quickly-threshold: 100.0
+    # Whether to fetch the UUID of old skulls that only contain a username.
+    fetch-skulls: true
+    # Number of networking threads to allocate.
+    netty-threads: 4
+    # Maximum attribute values for various modifiers.
+    attribute:
+      maxHealth.max: 2048.0
+      movementSpeed.max: 2048.0
+      attackDamage.max: 2048.0
+      maxHealth:
+        max: 2048.0
+      movementSpeed:
+        max: 2048.0
+      attackDamage:
+        max: 2048.0
+  # Various messages sent to clients for errors.
+  messages:
+    restart: '&cServer is restarting!'
+    whitelist: '&cYou are not on the whitelist!'
+    server-full: '&cThe server is full!'
+    # You can use {0} to insert the server version.
+    outdated-client: '&7Outdated client! Please use &c{0}'
+    # You can use {0} to insert the server version.
+    outdated-server: '&7Outdated server! Server is on &c{0}'
+    # You can use {0} to insert the command that was tried to use (without slash).
+    unknown-command: '&7Unknown command. Type &c/help &7for help.'
+    internal-error-command: '&cAn internal error occurred while attempting to perform
+      this command'
+    internal-error-tab-complete: '&cAn internal error occurred while attempting to
+      tab-complete this command'
+    ping:
+      # Supported placeholders: {PLAYER}, {PING}, {FORMATTED-PING}
+      your-ping: '&7Your current ping is: &a{PING}'
+      # Supported placeholders: {PLAYER}, {PING}, {FORMATTED-PING}
+      someone-ping: '&7Ping of &e{PLAYER}&7 is: &a{PING}'
+      # Formatting of {FORMATTED-PING} to for eg. show low ping on green and high on red.
+      # Use * to format all values from preset min value to max value (for simplification to "infinity").
+      # For eg. 100-* &c{PING}
+      ping-format:
+      - 0-50 &a{PING}
+      - 51-100 &e{PING}
+      - 101-* &c{PING}
+  commands:
+    # Whether player commands should be logged.
+    log: true
+    # Whether command block commands should be logged to console.
+    silent-commandblock-console: false
+    # Disables the bukkit variants of the following commands and defaults to the vanilla variants.
+    replace-commands:
+    - setblock
+    - summon
+    - testforblock
+    - tellraw
+    # Which commands should be excluded from spamming disconnect (if player use commands to often servers disconnect him).
+    spam-exclusions:
+    - /skill
+    # Change the verbosity of tab complete events.
+    # Disable all tab completion with -1.
+    # Enable server commands to be queryable with 0.
+    # Require n letters to be typed before completing with n.
+    tab-complete: 0
+  # Various settings related to server timings and debugging.
+  timings:
+    enabled: true
+    verbose: true
+    server-name-privacy: false
+    hidden-config-entries:
+    - database
+    - bungeecord-addresses
+    history-interval: 300
+    history-length: 3600
+  stats:
+    # Whether to disable saving of player statistics and achievements.
+    disable-saving: false
+    # Map of statistics and the values they should be forced.
+    forced-stats: {}
+  world-settings:
+    # Whether to log the per-world settings in console.
+    verbose: true
+    anti-xray:
+      # Whether to enable the anti-xray module.
+      enabled: true
+      # Controls which anti-xray modes to use.
+      # Mode 1 will hide all ores with stone.
+      # Mode 2 will create fake, clien-side ores around the world, which can impact client lag and network latency.
+      engine-mode: 1
+      # IDs of blocks that should be hidden in mode 1.
+      hide-blocks:
+      - 14
+      - 15
+      - 16
+      - 21
+      - 48
+      - 49
+      - 54
+      - 56
+      - 73
+      - 74
+      - 82
+      - 129
+      - 130
+      # IDs of blocks that should be replaced in mode 2.
+      replace-blocks:
+      - 1
+      - 5
+    # Whether to remove AI from mobs that originate from mob spawners.
+    nerf-spawner-mobs: false
+    # Speed at which certain crops will grow.
+    # Changing these values will not affect performance.
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 100
+      pumpkin-modifier: 100
+      wheat-modifier: 100
+      mushroom-modifier: 100
+      sapling-modifier: 100
+      nether-wart-modifier: 100
+    # Radius of chunks around players that mobs will naturally spawn.
+    mob-spawn-range: 4
+    # Radius in blocks around players that mobs are marked as active and are ticked.
+    entity-activation-range:
+      animals: 32
+      monsters: 32
+      ambient: 16
+    # Radius in blocks around players that the client will see.
+    # Only affects client-side performance.
+    entity-tracking-range:
+      players: 48
+      animals: 48
+      monsters: 48
+      misc: 32
+      other: 64
+    # Number of ticks between each of the following events.
+    ticks-per:
+      hopper-transfer: 8
+      hopper-check: 8
+    # Maximum throughput of items in a hopper per tick cycle.
+    hopper-amount: 1
+    # Whether to randomly sample chunks and validate lighting integrity.
+    random-light-updates: false
+    # Whether to save generic structure information.
+    # Only affects certain gameplay features such as witches spawning in huts.
+    save-structure-info: true
+    # Maximum number of chunks to send per packet.
+    max-bulk-chunks: 10
+    # Maximum number of other entities and entity can collide with per tick.
+    max-entity-collisions: 8
+    # Radius around dragons that players will hear the death sound.
+    dragon-death-sound-radius: 0
+    # Radius around withers that players will hear the spawn sound.
+    wither-spawn-sound-radius: 0
+    # Random seed used to generate and place villages.
+    seed-village: 10387312
+    # Random seed used to generate and place nether strongholds.
+    seed-feature: 14357617
+    # Number of hunger points to subtract upon each event.
+    hunger:
+      walk-exhaustion: 0.2
+      sprint-exhaustion: 0.8
+      combat-exhaustion: 0.3
+      regen-exhaustion: 3.0
+    # Maximum number of primed tnt entities per tick.
+    max-tnt-per-tick: 100
+    # Maximum number of milliseconds for entity movements tasks to have before getting skipped.
+    # Use 1000 to disable this feature, as recommended by paper.
+    max-tick-time:
+      tile: 50
+      entity: 50
+    # Set the tick update interval for hanging entities.
+    hanging-tick-frequency: 100
+    # Number of ticks before items on the ground will despawn.
+    item-despawn-rate: 6000
+    # Number of ticks before despawning arrows on the ground.
+    arrow-despawn-rate: 1200
+    # Radius in blocks for certain entities to merge together.
+    merge-radius:
+      item: 2.5
+      exp: 3.0
+    # Whether to allow zombie pigmen from spawning inside nether portals.
+    enable-zombie-pigmen-portal-spawns: true
+    # Number of chunks to load around each player.
+    # Must be within 1 and 15.
+    view-distance: 10
+    # Radius around withers that players will hear the spawn sound.
+    zombie-aggressive-towards-villager: true
+    # Number of chunks to be updated for growth per tick.
+    chunks-per-tick: 650
+    # Prevent the tick list from increasing over time.
+    # Use with caution, because world growth is stunted.
+    clear-tick-list: false
+# Configuration from paper.yml
+paper:
+  settings:
+    # Whether interaction packets should be limited from clients.
+    limit-player-interactions: true
+    # Speed at which baby zombies can move.
+    baby-zombie-movement-speed: 0.5
+    # Whether to save player data to disk.
+    save-player-data: true
+    # Whether arrow projectiles should have a random factor (like in vanilla minecraft).
+    include-randomness-in-arrow-trajectory: true
+    # Number of ticks between player data saves to disk.
+    player-auto-save-rate: -1
+    # Maximum number of player data to save per tick.
+    max-players-auto-save-per-tick: 10
+  # Percentage improvement to player damage with certain potions.
+  effect-modifiers:
+    strength: 1.3
+    weakness: -0.3
+  # Whether to allow certain buckets to stack as items.
+  stackable-buckets:
+    lava: false
+    water: false
+    milk: false
+  # Send a warning to console when players are moving at excessive speeds.
+  warn-when-setting-excessive-velocity: true
+  # List of items that are allowed to keep invalid data values.
+  data-value-allowed-items: []
+  world-settings:
+    # Whether to log the per-world settings in console.
+    verbose: true
+    # Number of ticks before attempting to spread grass.
+    grass-spread-tick-rate: 1
+    # Whether to revert tnt cannon logic to 1.7.
+    fix-cannons: false
+    # Percent of damage to receive while blocking.
+    player-blocking-damage-multiplier: 0.5
+    # Whether to delete invalid mob spawner items.
+    remove-invalid-mob-spawner-tile-entities: true
+    # Whether to remove dead entities in the explosion radius.
+    optimize-explosions: false
+    # Number of ticks to check for mob spawner locations.
+    mob-spawner-tick-rate: 1
+    # Whether to cache chunks when sending packets.
+    cache-chunk-maps: false
+    # Magic number for how loud tnt explosions should be.
+    tnt-explosion-volume: 4.0
+    # Whether to disable the suffocation check before every teleportation event.
+    disable-teleportation-suffocation-check: false
+    # Y-level at which squids will spawn.
+    squid-spawn-height:
+      minimum: 45.0
+      maximum: 63.0
+    # Maximum number of blocks certain plants will grow.
+    max-growth-height:
+      cactus: 3
+      reeds: 3
+    # Number of ticks before a fish can be caught.
+    fishing-time-range:
+      MinimumTicks: 100
+      MaximumTicks: 900
+    # Magic number for food exhaustion rate for certain events.
+    player-exhaustion:
+      block-break: 0.025
+      swimming: 0.015
+    despawn-ranges:
+      # Distance in blocks that mobs are randomly queued for removal.
+      soft: 32
+      # Distance in blocks that mobs are immediately removed.
+      hard: 128
+    # Y-level at which falling blocks will despawn.
+    falling-block-height-nerf: 0
+    # Whether to remove certain entities when entering unloaded chunks.
+    remove-unloaded:
+      enderpearls: true
+      tnt-entities: true
+      falling-blocks: true
+    # Whether to load chunks when certain entities enter them.
+    load-chunks:
+      enderpearls: false
+      tnt-entities: false
+      falling-blocks: false
+    game-mechanics:
+      # Whether boats should always drop boat items.
+      boats-drop-boats: false
+      # Whether to disable critical hits in PvP.
+      disable-player-crits: false
+      # Whether to allow chests to open with cats on top of them.
+      disable-chest-cat-detections: false
+      # Whether to never send end credits.
+      disable-end-credits: false
+    # Whether to apply void damage to entities on top of a nether portal.
+    nether-ceiling-void-damage: false
+    # Whether liquids should drain faster than normal.
+    fast-drain:
+      lava: false
+      water: false
+    # Speed in ticks at which lava flows in different worlds.
+    lava-flow-speed:
+      normal: 30
+      nether: 10
+    # Whether entities should not receive knockback from explosions.
+    disable-explosion-knockback: false
+    # Whether undead horses are allowed to be leashed.
+    allow-undead-horse-leashing: false
+    # Speed in ticks at which water flows over lava.
+    water-over-lava-flow-speed: 5
+    # Y-level at which primed tnt will despawn.
+    tnt-entity-height-nerf: 0
+    # Whether to recognize the hopper-check configuration options.
+    use-hopper-check: false
+    # Whether all chunks are allowed to spawn slimes.
+    all-chunks-are-slime-chunks: false
+    # Number of ticks to update inventory containers.
+    container-update-tick-rate: 1
+    # Whether to keep spawn chunks loaded at all times.
+    keep-spawn-loaded: true
+    # Whether falling blocks should not break when colliding with signs.
+    falling-blocks-collide-with-signs: false
+    # Whether to not send cave and ambient sounds.
+    disable-mood-sounds: false
+    # Whether to use asynchronous lighting for better performance.
+    use-async-lightning: true
+    # Maximum number of blocks to search for a nether portal before generating a new one.
+    portal-search-radius: 128
+    # Whether to disable thunder events.
+    disable-thunder: false
+    # Whether to disable ice and snow formation.
+    disable-ice-and-snow: false
+    # Maximum number of objects that follow the tick loop.
+    # Use with extreme caution.
+    tick-next-tick-list-cap: 10000
+    # Whether or not to always tick redstone even if the number of ticking objects is above the limit.
+    tick-next-tick-list-cap-ignores-redstone: false
+    # Number of ticks before saving the world.
+    auto-save-interval: -1
+    # Whether to enable certain features during world generation.
+    generator-settings:
+      canyon: true
+      caves: true
+      dungeon: true
+      fortress: true
+      mineshaft: true
+      monument: true
+      stronghold: true
+      temple: true
+      village: true
+      flat-bedrock: false
+    # Whether block locations are allowed to be tab completed.
+    allow-block-location-tab-completion: true
+# Configuration from taco.yml
+taco:
+  world-settings:
+    # Cannoning on east and west normally is not calculated properly.
+    # Enabling this option resolve this issue, but it's not vanilla behavior.
+    fix-east-west-cannoning: false
+    tnt:
+      # Whether optimize movement if tnt are traveling on long distance.
+      # This option may not reflect vanilla behavior.
+      optimize-movement: false
+      # Whether calculation of explosions in liquids should be processed.
+      optimize-liquid-explosions: true
+# Configuration from ion.yml
+ion:
+  redstone:
+    # Faster redstone implementation (see: https://www.spigotmc.org/resources/pandawire-1-8-8-1-15-2.41991/).
+    # It can have big impact on server performance, but also it can break a lot of mechanics.
+    # Use with caution!
+    panda-wire:
+      enabled: false
+      optimised: false
+  world-settings:
+    movement:
+      # Does entities movements should be cached.
+      # Enabled by default because shouldn't cause any bugs.
+      # Disable this if some bugs actually occur.
+      cache: true
+    tnt:
+      # Whether to use faster entity tracker.
+      # It could have good impact on performance, but also could break vanilla mechanics.
+      use-faster-tracker: false
+# Instructs the server how to handle player UUIDs and data when behind a proxy.
+# Set to match your proxy's online-mode setting.
+proxy-online-mode: true
+# Blocks through which enderpearls will pass through (AKA Taliban Pearls)
+pearl-passthrough:
+  slabs: false
+  stairs: false
+  fence-gates: false
+  chests: false
+  ender-chests: false
+  enchanting-tables: false
+  anvils: false
+  end-portal-frames: false
+  strings: false
+  cobwebs: false
+# How often player statistics (ESC -> Statistics) should be ticked.
+# Default vanilla value is every 1 tick, but every 1 second (20 ticks) is enough in most cases.
+# Making this value even bigger could be good idea and have good impact on performance.
+player-time-statistics-interval: 20
+game-mechanics:
+  tick-fluids: true
+# The max NBT size in bytes. The default value is 2097152 which is ~2Mb - it's insane big.
+# We are setting this to 50000 which is only ~0.05MB. That's enough in most cases.
+# Smaller values (Our 50000 is probably enough, but smaller value would be even better) prevents most NBT related overflow exploits (for eg. Books)
+nbt-read-limiter: 50000
+# Configuration of book limits.
+# Setting these values prevent players from using NBT overflow exploits.
+# See also nbt-read-limiter, maybe you don't have to change these values.
+book:
+  # The max book title length.
+  # Optimal values is 32.
+  max-title-length: 1024
+  # The max book author length.
+  # Optimal values is 16 (since players nicknames are up to 16 characters long).
+  max-author-length: 1024
+  # The max amount of pages a book can have.
+  # Disable limit with -1
+  # Optimal values is 64.
+  max-pages: -1
+  # The max length of one page the book can have.
+  # Optimal values is 400.
+  max-page-length: 32767
+# Allocates an entire cpu to the server - improves performance, but uses more cpu.
+# Enable it only if your OS is configured properly - see https://github.com/OpenHFT/Java-Thread-Affinity#isolcpus
+thread-affinity: false
+chunk:
+  # Normally we use bukkit.chunk-gc.load-threshold - it's define how many chunks should be loaded before running GC on them.
+  # This option make that value more flexible and depends it on view distance and player count (playerCount * viewDistance^2).
+  # We don't want to have a lots chunks loaded if we have empty server, but having to few on full server is not good idea too (especially if some chunks would be unloaded and almost again loaded).
+  adaptive-chunk-gc: false
+  # Enabling this option prevents entities from moving in unloaded chunk (and for eg. falling down in "slow-motion")
+  disable-unloaded-chunks-movement: false
+  # Configuration of chunk I/O (loading) since chunk loading is asynchronous.
+  # If you have CPU with more threads changing these values can have good impact on performance.
+  io:
+    # The amount of threads to use for chunk loading (start value).
+    base-threads: 2
+    # When more players join the server, new threads will be created.
+    # This values represents how many players are needed to create a new thread.
+    # For eg. base-threads is 2, on server is 100 players, when one more joins server new thread will be created and so on.
+    players-per-thread: 50
+tnt:
+  async:
+    # Whether some calculation of tnt explosions should be calculated asynchronously.
+    # Enabling this could be good idea since it can have good impact on performance.
+    enabled: false
+# When this option is enabled, the server will create a directory `legacy_configs` with files like bukkit.yml, spigot.yml etc.
+# Changing option there will not affect the server, it's only mirror of this file.
+# Enable this option only if some of your plugins are not compatible with the new configs.
+enable-legacy-config-files: false
+world-settings:
+  disabled-gamerules:
+    # Whether gamerule randomTickSpeed should be enabled or not.
+    # Plants growth, leaf decay, fire spread etc. depends on this value.
+    # Normally we have to cast String to Integer every tick which is costly.
+    # If this option is enabled, this gamerule is disabled and we use default vanilla value which is 3.
+    # If you know you won't use this gamerule you should enable this option.
+    random-tick-speed: false
+commands:
+  command-block-overrides: []
+  aliases:
+    icanhasbukkit:
+    - version
