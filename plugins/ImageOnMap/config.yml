@@ -27,7 +27,7 @@ limit-map-size-y: 0
 
 
 # Should the full image be saved when a map is rendered?
-save-full-image: false
+save-full-image: true
 
 
 # If you want to restrict what domains can be used to download images from, list them below.
