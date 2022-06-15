@@ -134,9 +134,9 @@ spigot:
       - 101-* &c{PING}
   commands:
     # Whether player commands should be logged.
-    log: true
+    log: false
     # Whether command block commands should be logged to console.
-    silent-commandblock-console: false
+    silent-commandblock-console: true
     # Disables the bukkit variants of the following commands and defaults to the vanilla variants.
     replace-commands:
     - setblock
@@ -200,14 +200,14 @@ spigot:
     # Speed at which certain crops will grow.
     # Changing these values will not affect performance.
     growth:
-      cactus-modifier: 100
-      cane-modifier: 100
-      melon-modifier: 100
-      pumpkin-modifier: 100
-      wheat-modifier: 100
-      mushroom-modifier: 100
-      sapling-modifier: 100
-      nether-wart-modifier: 100
+      cactus-modifier: 150
+      cane-modifier: 150
+      melon-modifier: 150
+      pumpkin-modifier: 150
+      wheat-modifier: 150
+      mushroom-modifier: 150
+      sapling-modifier: 150
+      nether-wart-modifier: 150
     # Radius of chunks around players that mobs will naturally spawn.
     mob-spawn-range: 4
     # Radius in blocks around players that mobs are marked as active and are ticked.
@@ -287,11 +287,11 @@ paper:
     # Whether interaction packets should be limited from clients.
     limit-player-interactions: true
     # Speed at which baby zombies can move.
-    baby-zombie-movement-speed: 0.5
+    baby-zombie-movement-speed: 1.0
     # Whether to save player data to disk.
     save-player-data: true
     # Whether arrow projectiles should have a random factor (like in vanilla minecraft).
-    include-randomness-in-arrow-trajectory: true
+    include-randomness-in-arrow-trajectory: false
     # Number of ticks between player data saves to disk.
     player-auto-save-rate: -1
     # Maximum number of player data to save per tick.
@@ -506,7 +506,7 @@ book:
   max-page-length: 32767
 # Allocates an entire cpu to the server - improves performance, but uses more cpu.
 # Enable it only if your OS is configured properly - see https://github.com/OpenHFT/Java-Thread-Affinity#isolcpus
-thread-affinity: false
+thread-affinity: true
 chunk:
   # Normally we use bukkit.chunk-gc.load-threshold - it's define how many chunks should be loaded before running GC on them.
   # This option make that value more flexible and depends it on view distance and player count (playerCount * viewDistance^2).
@@ -518,16 +518,16 @@ chunk:
   # If you have CPU with more threads changing these values can have good impact on performance.
   io:
     # The amount of threads to use for chunk loading (start value).
-    base-threads: 2
+    base-threads: 4
     # When more players join the server, new threads will be created.
     # This values represents how many players are needed to create a new thread.
     # For eg. base-threads is 2, on server is 100 players, when one more joins server new thread will be created and so on.
-    players-per-thread: 50
+    players-per-thread: 1
 tnt:
   async:
     # Whether some calculation of tnt explosions should be calculated asynchronously.
     # Enabling this could be good idea since it can have good impact on performance.
-    enabled: false
+    enabled: true
 # When this option is enabled, the server will create a directory `legacy_configs` with files like bukkit.yml, spigot.yml etc.
 # Changing option there will not affect the server, it's only mirror of this file.
 # Enable this option only if some of your plugins are not compatible with the new configs.
