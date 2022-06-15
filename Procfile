@@ -1,0 +1,1 @@
+release: java -Xms2g -Xmx5g -jar titanium.jar
