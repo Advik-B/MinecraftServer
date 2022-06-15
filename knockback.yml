@@ -22,8 +22,8 @@ profiles:
         horizontal: 0.4
         vertical: 0.4
       snowball:
-        horizontal: 0.4
-        vertical: 0.4
+        horizontal: 10
+        vertical: 10
       egg:
         horizontal: 0.4
         vertical: 0.4
